@@ -1,0 +1,7 @@
+---
+const p = Astro.props.frontmatter?.title || Astro.props.title;
+---
+
+<title>{p}</title>
+<h1>{p}</h1>
+<slot />

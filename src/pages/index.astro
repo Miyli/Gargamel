@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../layouts/Layout.astro";
 
 const posts = await Promise.all(
     Object.entries(await import.meta.glob("/src/pages/library/*.mdx")).map(
@@ -17,8 +17,7 @@ const posts = await Promise.all(
 ).then((posts) => posts.sort((a, b) => a.title.localeCompare(b.title)));
 ---
 
-<BaseLayout title="My Blog">
-    <h1>Gargamel</h1>
+<BaseLayout title="Gargamel">
     <ul>
         {
             posts.map((post) => (
