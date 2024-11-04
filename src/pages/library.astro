@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+const p = await Promise.all(
+    Object.entries(await import.meta.glob("/src/pages/library/*.mdx")).map(
+        async ([p, r]) => ({
+            url: p.replace(/^\/src\/pages\/library\/(.*)\.mdx$/, "/library/$1"),
+            title: (await r()).frontmatter.title,
+        }),
+    ),
+).then((p) => p.sort((a, b) => a.title.localeCompare(b.title)));
+---
+
+<Layout title="Library">
+    <ul>
+        {
+            p.map((p) => (
+                <li>
+                    <a href={p.url}>{p.title}</a>
+                </li>
+            ))
+        }
+    </ul>
+</Layout>

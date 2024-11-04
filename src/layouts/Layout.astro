@@ -2,6 +2,14 @@
 const p = Astro.props.frontmatter?.title || Astro.props.title;
 ---
 
-<title>{p}</title>
-<h1>{p}</h1>
-<slot />
+<html style="background:#000;color:#fff">
+    <meta name="viewport" content="width=device-width" />
+    <title>{p}</title>
+    <nav>
+        <a href="/">home</a> / <a href="/library">library</a> / <a
+            href="https://github.com/Miyli/Gargamel">github</a>
+    </nav>
+    <hr />
+    <h1>{p}</h1>
+    <slot />
+</html>
