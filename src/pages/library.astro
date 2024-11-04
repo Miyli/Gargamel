@@ -11,13 +11,11 @@ const p = await Promise.all(
 ---
 
 <Layout title="Library">
-    <ul>
-        {
-            p.map((p) => (
-                <li>
-                    <a href={p.url}>{p.title}</a>
-                </li>
-            ))
-        }
-    </ul>
+    {
+        p.map((p) => (
+            <div>
+                <a href={p.url}>{p.title}</a>
+            </div>
+        ))
+    }
 </Layout>

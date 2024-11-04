@@ -1,5 +1,5 @@
 # Gargamel
-An ultra-lightweight blog aiming to save every single byte.
+The blog where every byte matters - an exercise in digital minimalism.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Miyli/Gargamel)
 

@@ -1,15 +1,84 @@
 ---
-const p = Astro.props.frontmatter?.title || Astro.props.title;
+const t = Astro.props.frontmatter?.title || Astro.props.title;
+const currentPath = Astro.url.pathname;
 ---
 
-<html style="background:#000;color:#fff">
-    <meta name="viewport" content="width=device-width" />
-    <title>{p}</title>
-    <nav>
-        <a href="/">home</a> / <a href="/library">library</a> / <a
-            href="https://github.com/Miyli/Gargamel">github</a>
-    </nav>
-    <hr />
-    <h1>{p}</h1>
-    <slot />
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="title">┌─ {t}</div>
+                <div class="nav">
+                    └─┬ {
+                        currentPath === "/" ? (
+                            <span class="inactive">home</span>
+                        ) : (
+                            <a href="/">home</a>
+                        )
+                    } ─┴
+                    {
+                        currentPath === "/library" ? (
+                            <span class="inactive">library</span>
+                        ) : (
+                            <a href="/library">library</a>
+                        )
+                    } ─┬
+                    <span class="source-wrapper">
+                        <a
+                            href="https://github.com/Miyli/Gargamel"
+                            class="external">source</a
+                        > ─┤
+                    </span>
+                </div>
+            </div>
+            <hr />
+            <slot />
+        </div>
+    </body>
+    <style>
+        html {
+            background: #000;
+            color: #fff;
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 16px;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .header {
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        a {
+            color: #9d7cd8;
+            text-decoration: none;
+        }
+        .external {
+            color: #83e6c0;
+        }
+        .inactive {
+            color: #666;
+        }
+        @media (max-width: 290px) {
+            .source-wrapper {
+                display: none;
+            }
+        }
+    </style>
 </html>
