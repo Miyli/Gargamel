@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 const t = Astro.props.frontmatter?.title || Astro.props.title;
 ---
 
@@ -6,6 +7,7 @@ const t = Astro.props.frontmatter?.title || Astro.props.title;
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
+        <ViewTransitions />
     </head>
     <body>
         <main>
@@ -18,53 +20,9 @@ const t = Astro.props.frontmatter?.title || Astro.props.title;
                 </nav>
             </header>
             <hr />
-            <slot />
+            <div class="content">
+                <slot />
+            </div>
         </main>
-        <style is:global>
-            :root {
-                --bg-color: #ffffff;
-                --text-color: #1a1a1a;
-                --link-color: #0066cc;
-                --link-hover: #003366;
-                --max-width: 800px;
-                --body-padding: 1rem;
-            }
-
-            @media (prefers-color-scheme: dark) {
-                :root {
-                    --bg-color: #000;
-                    --text-color: #fff;
-                    --link-color: #66b3ff;
-                    --link-hover: #99ccff;
-                }
-            }
-
-            body {
-                background-color: var(--bg-color);
-                color: var(--text-color);
-                margin: 0;
-                padding: var(--body-padding);
-            }
-
-            main {
-                max-width: var(--max-width);
-                margin: 0 auto;
-            }
-
-            a {
-                color: var(--link-color);
-                text-decoration: none;
-            }
-
-            a:hover {
-                color: var(--link-hover);
-                text-decoration: underline;
-            }
-
-            hr {
-                border-color: var(--text-color);
-                opacity: 0.2;
-            }
-        </style>
     </body>
 </html>
