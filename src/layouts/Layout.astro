@@ -1,84 +1,70 @@
 ---
 const t = Astro.props.frontmatter?.title || Astro.props.title;
-const currentPath = Astro.url.pathname;
 ---
 
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
-        <div class="container">
-            <div class="header">
-                <div class="title">┌─ {t}</div>
-                <div class="nav">
-                    └─┬ {
-                        currentPath === "/" ? (
-                            <span class="inactive">home</span>
-                        ) : (
-                            <a href="/">home</a>
-                        )
-                    } ─┴
-                    {
-                        currentPath === "/library" ? (
-                            <span class="inactive">library</span>
-                        ) : (
-                            <a href="/library">library</a>
-                        )
-                    } ─┬
-                    <span class="source-wrapper">
-                        <a
-                            href="https://github.com/Miyli/Gargamel"
-                            class="external">source</a
-                        > ─┤
-                    </span>
-                </div>
-            </div>
+        <main>
+            <header>
+                <div>┌─ {t}</div>
+                <nav>
+                    └─┬ <a href="/">home</a>
+                    ─┬ <a href="/library">library</a>
+                    ─┬ <a href="https://github.com/Miyli/Gargamel">source</a>
+                </nav>
+            </header>
             <hr />
             <slot />
-        </div>
-    </body>
-    <style>
-        html {
-            background: #000;
-            color: #fff;
-            font-size: 16px;
-        }
-        body {
-            margin: 0;
-            padding: 16px;
-            font-family: monospace;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-        }
-        .header {
-            margin-bottom: 4px;
-            word-break: break-word;
-        }
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        a {
-            color: #9d7cd8;
-            text-decoration: none;
-        }
-        .external {
-            color: #83e6c0;
-        }
-        .inactive {
-            color: #666;
-        }
-        @media (max-width: 290px) {
-            .source-wrapper {
-                display: none;
+        </main>
+        <style is:global>
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #1a1a1a;
+                --link-color: #0066cc;
+                --link-hover: #003366;
+                --max-width: 800px;
+                --body-padding: 1rem;
             }
-        }
-    </style>
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg-color: #000;
+                    --text-color: #fff;
+                    --link-color: #66b3ff;
+                    --link-hover: #99ccff;
+                }
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: var(--body-padding);
+            }
+
+            main {
+                max-width: var(--max-width);
+                margin: 0 auto;
+            }
+
+            a {
+                color: var(--link-color);
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: var(--link-hover);
+                text-decoration: underline;
+            }
+
+            hr {
+                border-color: var(--text-color);
+                opacity: 0.2;
+            }
+        </style>
+    </body>
 </html>
